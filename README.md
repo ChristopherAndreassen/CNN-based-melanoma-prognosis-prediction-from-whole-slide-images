@@ -8,21 +8,21 @@
 
 The code was built using the following Python packages:
 
-Python==3.10.4
-matplotlib==3.5.1
-numpy==1.22.3
-opencv-python==4.5.5
-openpyxl==3.0.9
-pandas==1.4.2
-pickle==4.0
-Pillow==9.1.0
-pyvips==2.1.16
-scikit-image==0.19.2
-scikit-learn==1.0.2
-scipy==1.8.0
-seaborn==0.11.2
-torch==1.11.0
-torchvision==0.12.0a0+76b4a42
+Python==3.10.4__
+matplotlib==3.5.1__
+numpy==1.22.3__
+opencv-python==4.5.5__
+openpyxl==3.0.9__
+pandas==1.4.2__
+pickle==4.0__
+Pillow==9.1.0__
+pyvips==2.1.16__
+scikit-image==0.19.2__
+scikit-learn==1.0.2__
+scipy==1.8.0__
+seaborn==0.11.2__
+torch==1.11.0__
+torchvision==0.12.0a0+76b4a42__
 
 ### Link to paper
 
