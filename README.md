@@ -22,7 +22,7 @@ scikit-learn==1.0.2<br />
 scipy==1.8.0<br />
 seaborn==0.11.2<br />
 torch==1.11.0<br />
-torchvision==0.12.0a0+76b4a42<br />
+torchvision==0.12.0a0+76b4a42
 
 ### Link to paper
 
