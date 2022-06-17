@@ -9,7 +9,6 @@
 The code was built using the following Python packages:
 
 Python==3.10.4
-
 matplotlib==3.5.1
 numpy==1.22.3
 opencv-python==4.5.5
