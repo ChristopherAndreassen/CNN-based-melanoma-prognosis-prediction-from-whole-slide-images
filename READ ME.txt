@@ -1,0 +1,105 @@
+### main.py ###
+
+This program runs functions in "Preprocessing.py", "TorchDNN.py", "Inference.py", "Prediction.py" and "Inference.py".
+Variables to be changed and variables used in multiple functions are defined in this program.
+Variables that are not used for inference/training does not have to be correct when utilizing inference/training.
+
+--- These parameters has to be changed to the correct values, in order for the program to work ---
+
+Change these variables to correct folder paths:
+- WSI_path 			- Folder path to WSIs, of filetype ".ndpi".
+- annotation_path 	- Folder path to annotated areas in WSIs, located in ".xml"-file.
+
+Change this variable to correct clinical data file path (Not in use for inference):
+- xlsx_file			- Path to ".xlsx" file, containing the global label of each WSI. First column in this file should contain WSI names (rootName + ID), second column should contain corresponding prognosis label.
+
+Other variables:
+- rootName			- The common name of all WSI files. The name of the utilized WSI files should contain a common name, followed by an ID number that is unique for every WSI file. Example: 'SUShud'.
+- tag				- Should correspond with a tag from the XLM file, to make mask from. Example: 'Lesion malign'.
+- xlsx_min_row 		- Position row of the first element in the ".xlsx" file (Not in use for inference).
+- xlsx_ant_elements 	- Number of rows in xlsx-file that contains a WSI name and prognosis (Not in use for inference).
+- xlsx_value		- Prognosis value in xlsx-file corresponding to good prognosis (Not in use for inference). Example: 'Good prognosis'.
+
+--- End of section ---
+
+Change these variables to desired folder paths:
+- output_path 		- Folder path to save tile coordinates.
+- mask_path 		- Folder path to save mask images.
+- text_folder_name 	- Name of current folder to save text files and model.
+- text_folder_path	- Path to folders, to stored text files in. Full path to folder, to store text files in: text_folder_path + '/' + text_folder_name.
+
+Change these variables to desired file names:
+- predictValues_name	- Name of text file containing the prediction values of training the model (Not in use for inference).
+- inference_predictValues_name - Name of text file containing the prediction values of inference (Not in use for training).
+- hist_name			- Name of text file containing accuracy and loss of training the model (Not in use for inference).
+- model_path_name		- Model file name.
+- text_info_name		- Name of text file containing information about the settings of this run (Not in use for inference).
+- prediction_name		- Name of text file to save prediction of WSIs (Not in use for training).
+
+Other variables:
+- mode			- Mode "1" trains a model and evaluates based on the validation, and mode "0" uses inference, where a trained model is used to predict prognosis of WSIs.
+- feature_extract		- Whether to freeze feature layer or not.
+- num_classes		- Number of classes, should be set to 2.
+- batch_size		- Batch size for training.
+- magnification_levels	- Magnification level(s) to use tiles from. Available options: ['10x', '20x', '40x'].
+- tilePerWSI		- Number of tiles to gather from each WSI.
+- input_size		- Size to scale the tiles to. Should be set to "224", to correspond with the size of images in ImageNet.
+- allow_textFile_overwrite - Set to "False" to avoid stored models and information about parameters, from previous training on the model, to be overwritten (Not in use for inference).
+
+
+### Preprocessing.py ###
+
+This program contains function "make_AnnotatedLesionMasks()" and "extract_tiles()", which are used for preprocessing of WSIs.
+Functions in the programs "MyMethods.py" and "OtherMethods" are used in this program.
+
+--- make_AnnotatedLesionMasks() ---
+Inputs: Stored WSIs and annotations of the WSIs.
+Output: Saves lesion masks of input WSIs.
+
+--- extract_tiles() ---
+Inputs: Stored WSIs and lesion masks of the WSIs.
+Output: Saves tile coordinates of tiles from the lesion in WSIs.
+
+
+### TorchDNN.py ###
+
+This program contains function "DNN()", which makes, trains and validates a model.
+Functions in the programs "MyMethods.py" and "OtherMethods" are used in this program.
+
+--- DNN() ---
+Inputs: ".xlsx" file, stored tile coordinates and WSIs.
+Output: Saves model, prediction values and history of the training and validation.
+
+
+### Inference.py ###
+
+This program contains function "Inference()", which runs data into a model to find prediction values of this data.
+Functions in the programs "MyMethods.py" and "OtherMethods" are used in this program.
+
+--- Inference() ---
+Inputs: Stored model, tile coordinates and WSIs.
+Output: Saves prediction values.
+
+
+### Prediction.py ###
+
+This program contains function "Predict_validationData()" and "Predict_inference()", which predicts the prognosis of WSIs using stored prediction values.
+Function "read_listedObject_from_text()", in the program "MyMethods.py" is used in this program.
+
+--- Predict_validationData() ---
+Inputs: Stored prediction values and history of the training and validation.
+Output: Prints predicted prognosis and evaluation metrics, using the input prediction values. Shows confusion matrix for prediction of WSIs and plot of accuracy and loss.
+
+--- Predict_inference() ---
+Inputs: Stored prediction values.
+Output: Prints predicted prognosis using the input prediction values.
+
+
+### Other information ###
+
+Further explanations of variables are located as comments in the python scripts.
+Variables containing file names should be without the file type (Example: .xlsx). Example: 'Master_god_dårlig_prognose'.
+All program files should be in the same folder.
+The inference method expects that a model is already made and located in: text_folder_path + '/' + text_folder_name.
+
+
