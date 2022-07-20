@@ -1,4 +1,4 @@
-# Melanoma-prognosis prediction using image processing and machine learning
+# CNN based melanoma prognosis prediction from whole slide images
 
 
 ### Abstract
